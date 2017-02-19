@@ -3,7 +3,7 @@ html, body {
   height: 100%;
   font-feature-settings: "palt" 1;
   -webkit-font-smoothing: antialiased;
-  font-family: -apple-system, 'BlinkMacSystemFont', 'YuGothic';
+  font-family: -apple-system, 'BlinkMacSystemFont', 'Hiragino Sans';
   font-weight: 300;
   font-size: small;
   color: white;
