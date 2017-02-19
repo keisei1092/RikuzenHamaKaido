@@ -4,15 +4,22 @@
 (function() {
   window.jQuery = window.$ = require('./node_modules/jquery/dist/jquery.min');
 
-  const twitterClient = require('./twitter');
+  // const twitterClient = require('./twitter');
 
+  var mockTweets = require('./mock_tweets').map(function(mockTweet) {
+    return mockTweet.text;
+  });
+
+  /*
   var element = [];
   twitterClient.get('statuses/home_timeline', function(error, tweets, response) {
     if(error) throw error;
     element = tweets.map(function(tweet) { return tweet.text });
+    debugger;
   });
+  */
 
-  var $element = element.map(function(number) {
+  var $element = mockTweets.map(function(number) {
     var $tr = $('<tr></tr>');
     var $td = $('<td></td>');
     $td.html(number);
@@ -21,4 +28,4 @@
   });
 
   $('#timeline').append($element);
-}());
+})();
