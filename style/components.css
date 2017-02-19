@@ -1,7 +1,12 @@
-.background-twitter-dark {
-  background-color: #1A2632;
+.padding-normal {
+  padding: 8px;
 }
 
 .vertical-align-top {
   vertical-align: top;
+}
+
+
+.background-twitter-dark {
+  background-color: #1A2632;
 }

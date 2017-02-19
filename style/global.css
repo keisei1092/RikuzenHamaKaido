@@ -7,6 +7,8 @@ html, body {
   font-weight: 300;
   font-size: small;
   color: white;
+  padding: 0;
+  margin: 0;
 }
 
 html {
