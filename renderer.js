@@ -19,9 +19,20 @@
 
   var $element = mockTweets.map(function(tweet) {
     var $tr = $('<tr></tr>');
-    var $td = $('<td></td>');
-    $td.html(tweet.text);
-    $tr.append($td);
+
+    var $imageTd = $('<td></td>');
+
+    var $iconImg = $('<img/>');
+    $iconImg.attr('src', tweet.user.profile_image_url);
+    $imageTd.append($iconImg);
+
+    $tr.append($imageTd);
+
+    var $textTd = $('<td></td>');
+    $textTd.html(tweet.text);
+
+    $tr.append($textTd);
+
     return $tr;
   });
 
