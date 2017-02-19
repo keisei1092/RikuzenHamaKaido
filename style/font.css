@@ -1,7 +1,11 @@
 .font-family-default {
-  font-family: -apple-system, 'BlinkMacSystemFont';
+  font-family: -apple-system, 'BlinkMacSystemFont', 'Hiragino Sans';
 }
 
 .font-thin {
-  font-weight: 200;
+  font-weight: 300;
+}
+
+.font-small {
+  font-size: small;
 }
