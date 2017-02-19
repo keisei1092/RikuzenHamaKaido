@@ -1,3 +1,7 @@
 .font-family-default {
   font-family: -apple-system, 'BlinkMacSystemFont';
 }
+
+.font-thin {
+  font-weight: 200;
+}
