@@ -6,9 +6,7 @@
 
   // const twitterClient = require('./twitter');
 
-  var mockTweets = require('./mock_tweets').map(function(mockTweet) {
-    return mockTweet.text;
-  });
+  var mockTweets = require('./mock_tweets');
 
   /*
   var element = [];
@@ -19,10 +17,10 @@
   });
   */
 
-  var $element = mockTweets.map(function(number) {
+  var $element = mockTweets.map(function(tweet) {
     var $tr = $('<tr></tr>');
     var $td = $('<td></td>');
-    $td.html(number);
+    $td.html(tweet.text);
     $tr.append($td);
     return $tr;
   });
