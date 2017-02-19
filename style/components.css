@@ -6,6 +6,10 @@
   vertical-align: top;
 }
 
+.border-normal {
+  border-bottom: solid 1px black;
+}
+
 
 .background-twitter-dark {
   background-color: #1A2632;
