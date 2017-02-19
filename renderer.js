@@ -22,15 +22,12 @@
 
     var $imageTd = $('<td></td>');
 
-    var $iconImg = $('<img/>');
-    $iconImg.attr('src', tweet.user.profile_image_url);
+    var $iconImg = $('<img/>').attr('src', tweet.user.profile_image_url);
     $imageTd.append($iconImg);
 
+    var $textTd = $('<td></td>').html(tweet.text);
+
     $tr.append($imageTd);
-
-    var $textTd = $('<td></td>');
-    $textTd.html(tweet.text);
-
     $tr.append($textTd);
 
     return $tr;
