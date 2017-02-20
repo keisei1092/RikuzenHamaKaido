@@ -39,13 +39,17 @@
   document.onkeydown = checkKey;
   function checkKey(e) {
       e = e || window.event;
-      if (e.keyCode == '74') {
+      var keyJ = '74';
+      var keyK = '75';
+      var keyL = '76';
+
+      if (e.keyCode == keyJ) {
           down();
       }
-      else if (e.keyCode == '75') {
+      else if (e.keyCode == keyK) {
           up();
       }
-      else if (e.keyCode == '76') {
+      else if (e.keyCode == keyL) {
          like();
       }
   }
