@@ -4,53 +4,78 @@
 (function() {
   window.jQuery = window.$ = require('./node_modules/jquery/dist/jquery.min');
 
-  // const twitterClient = require('./twitter');
+  // var mockTweets = require('./mock_tweets');
 
-  var mockTweets = require('./mock_tweets');
+  const twitterClient = require('./twitter');
+  var tweets = [];
+  var $elements = [];
+  function fetchTweets() {
+    return new Promise(function(resolve, object) {
+      twitterClient.get('statuses/home_timeline', {count: 200}, function(error, tweets, response) {
+        if(error) reject();
+        this.tweets = tweets;
+        resolve();
+      });
+    });
+  }
 
-  /*
-  var element = [];
-  twitterClient.get('statuses/home_timeline', function(error, tweets, response) {
-    if(error) throw error;
-    element = tweets.map(function(tweet) { return tweet.text });
-    debugger;
-  });
-  */
+  function createDomElements() {
+    return new Promise(function(resolve, reject) {
+      var $elements = this.tweets.map(function(tweet) {
+        var $tr = $('<tr></tr>');
 
-  var $element = mockTweets.map(function(tweet) {
-    var $tr = $('<tr></tr>');
+        var $imageTd = $('<td class="padding-normal border-normal"></td>');
 
-    var $imageTd = $('<td class="padding-normal border-normal"></td>');
+        var $iconImg = $('<img/>').attr('src', tweet.user.profile_image_url);
+        $imageTd.append($iconImg);
 
-    var $iconImg = $('<img/>').attr('src', tweet.user.profile_image_url);
-    $imageTd.append($iconImg);
+        var $textTd = $('<td class="padding-normal border-normal"></td>').html(tweet.text);
 
-    var $textTd = $('<td class="padding-normal border-normal"></td>').html(tweet.text);
+        $tr.append($textTd);
+        $tr.append($imageTd);
 
-    $tr.append($textTd);
-    $tr.append($imageTd);
+        return $tr;
+      });
+      this.$elements = $elements;
+      resolve();
+    });
+  }
 
-    return $tr;
-  });
+  function injectDomElements() {
+    return new Promise(function(resolve, reject) {
+      $('#timeline').append(this.$elements);
+      resolve();
+    });
+  }
 
-  $('#timeline').append($element);
+  fetchTweets()
+  .then(createDomElements)
+  .then(injectDomElements);
 
   // key
   document.onkeydown = checkKey;
   function checkKey(e) {
       e = e || window.event;
-      var keyJ = '74';
-      var keyK = '75';
-      var keyL = '76';
+      var keyJ = 74;
+      var keyK = 75;
+      var keyL = 76;
+      var keyPeriod = 190;
 
-      if (e.keyCode == keyJ) {
+      switch (e.keyCode) {
+        case keyJ:
           down();
-      }
-      else if (e.keyCode == keyK) {
+          break;
+        case keyK:
           up();
-      }
-      else if (e.keyCode == keyL) {
-         like();
+          break;
+        case keyL:
+          like();
+          break;
+        case keyPeriod:
+          reload();
+          break;
+        default:
+          break;
       }
   }
 
@@ -60,7 +85,7 @@
     if (pointer === undefined) {
       pointer = 0;
       repaint();
-    } else if (pointer >= mockTweets.length - 1) {
+    } else if (pointer >= this.$elements.length - 1) {
       return;
     } else {
       pointer++;
@@ -84,13 +109,16 @@
     console.log('like');
   }
 
+  function reload() {
+    console.log('reload');
+  }
+
   function repaint() {
     $('tr').removeClass('selected'); // 全部消えるかな？？？？？？？
     if (pointer === undefined) {
       return;
     }
     $($('tr')[pointer]).addClass('selected');
-    console.log($($('tr')[pointer]).scrollTop());
     var height = window.innerHeight / 3;
     $(window).scrollTop($($('tr')[pointer]).offset().top - height);
   }
