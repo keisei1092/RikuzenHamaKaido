@@ -34,4 +34,60 @@
   });
 
   $('#timeline').append($element);
+
+  // key
+  document.onkeydown = checkKey;
+  function checkKey(e) {
+      e = e || window.event;
+      if (e.keyCode == '74') {
+          down();
+      }
+      else if (e.keyCode == '75') {
+          up();
+      }
+      else if (e.keyCode == '76') {
+         like();
+      }
+  }
+
+  // point
+  var pointer = undefined;
+  function down() {
+    if (pointer === undefined) {
+      pointer = 0;
+      repaint();
+    } else if (pointer >= mockTweets.length - 1) {
+      return;
+    } else {
+      pointer++;
+      repaint();
+    }
+  }
+
+  function up() {
+    if (pointer === undefined) {
+      pointer = 0;
+      repaint();
+    } else if (pointer <= 0) {
+      return;
+    } else {
+      pointer--;
+      repaint();
+    }
+  }
+
+  function like() {
+    console.log('like');
+  }
+
+  function repaint() {
+    $('tr').removeClass('selected'); // 全部消えるかな？？？？？？？
+    if (pointer === undefined) {
+      return;
+    }
+    $($('tr')[pointer]).addClass('selected');
+    console.log($($('tr')[pointer]).scrollTop());
+    var height = window.innerHeight / 3;
+    $(window).scrollTop($($('tr')[pointer]).offset().top - height);
+  }
 })();
