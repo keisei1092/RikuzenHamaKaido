@@ -20,12 +20,12 @@
   var $element = mockTweets.map(function(tweet) {
     var $tr = $('<tr></tr>');
 
-    var $imageTd = $('<td class="border-normal"></td>');
+    var $imageTd = $('<td class="padding-normal border-normal"></td>');
 
     var $iconImg = $('<img/>').attr('src', tweet.user.profile_image_url);
     $imageTd.append($iconImg);
 
-    var $textTd = $('<td class="border-normal"></td>').html(tweet.text);
+    var $textTd = $('<td class="padding-normal border-normal"></td>').html(tweet.text);
 
     $tr.append($textTd);
     $tr.append($imageTd);
